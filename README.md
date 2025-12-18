@@ -44,6 +44,46 @@ medchain/
 
 ---
 
+## ⚙️ Installation & Setup
+
+### 1️⃣ Clone Repository
+
+```bash
+git clone https://github.com/Erlemico/MedChain.git
+cd MedChain
+```
+
+### 2️⃣ Create Virtual Environment
+
+```bash
+python -m venv venv
+source venv/bin/activate
+```
+
+> On Windows:
+
+```bash
+venv\Scripts\activate
+```
+
+---
+
+### 3️⃣ Install Dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+---
+
+### 4️⃣ Run Application
+
+```bash
+python app.py
+```
+
+---
+
 ## 🧱 Block Structure
 
 ```json
