@@ -24,10 +24,10 @@ JAKARTA_TZ = timezone(timedelta(hours=7))
 # HELPERS
 def validate_request_payload(data: dict):
     if not isinstance(data, dict):
-        return False, "Request body harus JSON object."
+        return False, "Request body must be a JSON object."
     missing = [k for k in REQUIRED_FIELDS if k not in data or data[k] in (None, "")]
     if missing:
-        return False, f"Field wajib kurang: {', '.join(missing)}"
+        return False, f"Required field is missing: {', '.join(missing)}"
     return True, ""
 
 
@@ -167,11 +167,22 @@ def add_data():
             cloud_info["response_text"] = resp.text[:200]
 
     except requests.exceptions.Timeout:
-        cloud_info = {"error": "timeout", "message": "Request to Google Apps Script timed out"}
+        cloud_info = {
+            "error": "timeout", 
+            "message": "Request to Google Apps Script timed out"
+        }
+
     except requests.exceptions.RequestException as e:
-        cloud_info = {"error": "request_error", "message": str(e)}
+        cloud_info = {
+            "error": "request_error", 
+            "message": str(e)
+        }
+
     except Exception as e:
-        cloud_info = {"error": "unexpected_error", "message": str(e)}
+        cloud_info = {
+            "error": "unexpected_error", 
+            "message": str(e)
+        }
 
     return jsonify({
         "status": "success",
@@ -207,7 +218,10 @@ def verify_block(block_id: int):
             break
 
     if idx is None:
-        return jsonify({"status": "error", "message": "Block not found"}), 404
+        return jsonify({
+            "status": "error", 
+            "message": "Block not found"
+        }), 404
 
     partial = verify_chain(blockchain[: idx + 1])
     if not partial.get("valid"):
